@@ -1,0 +1,21 @@
+<?php
+// download.php
+$senha_correta = 'sahiti'; 
+$arquivo = 'C:\Users\vinic\OneDrive\Área de Trabalho\engima\C.zip';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['password'] === $senha_correta) {
+       
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename($arquivo));
+        header('Content-Length: ' . filesize($arquivo));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        readfile($arquivo);
+        exit;
+    } else {
+        echo "Senha incorreta.";
+    }
+}

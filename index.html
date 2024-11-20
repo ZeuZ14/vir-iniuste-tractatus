@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vir iniuste tractatus</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digite a senha para descobrir a verdade:</h1>
+        <form id="downloadForm">
+            <input type="password" id="password" placeholder="Digite sua senha">
+            <button type="submit">Descobrir</button>
+        </form>
+        <div id="message"></div>
+    </div>
+    <script>
+        const form = document.getElementById('downloadForm');
+        const message = document.getElementById('message');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+
+            fetch('download.php', {
+                method: 'POST',
+                body: new URLSearchParams({ password })
+            })
+            .then(response => response.text())
+            .then(data => {
+                message.textContent = data;
+            });
+        });
+    </script>
+</body>
+</html>
